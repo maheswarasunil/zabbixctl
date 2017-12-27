@@ -9,7 +9,7 @@ hosts latest data and groups of users.
 ## Installation
 
 ```
-go get github.com/kovetskiy/zabbixctl
+go get github.com/maheswarasunil/zabbixctl
 ```
 
 afterwards executable will be placed as `$GOPATH/bin/zabbixctl`
@@ -25,6 +25,7 @@ syntax:
   address  = "zabbix.local"
   username = "admin"
   password = "password"
+  ignoreServerCert = "true" or "false"
 
 [session]
   path = "~/.cache/zabbixctl.session"

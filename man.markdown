@@ -16,6 +16,7 @@ placed in `~/.config/zabbixctl.conf` and must be written using following syntax:
       address  = "zabbix.local"
       username = "admin"
       password = "password"
+      ignoreServerCert = "true" or "false"
 
     [session]
       path = "~/.cache/zabbixctl.session"

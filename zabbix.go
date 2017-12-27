@@ -11,6 +11,7 @@ import (
 	"strings"
 	"sync/atomic"
 	"time"
+	"crypto/tls"
 
 	"github.com/zazab/hierr"
 )
@@ -39,12 +40,22 @@ type Zabbix struct {
 }
 
 func NewZabbix(
-	address, username, password, sessionFile string,
+	address, username, password, ignoreServerCert, sessionFile string,
 ) (*Zabbix, error) {
 	var err error
 
+	var ignoreCert bool 
+	if ignoreServerCert == "true" {
+		ignoreCert = true
+	} else {
+		ignoreCert = false
+	}
+
+	tr := &http.Transport{
+			TLSClientConfig: &tls.Config{InsecureSkipVerify: ignoreCert},
+		}
 	zabbix := &Zabbix{
-		client: &http.Client{},
+		client: &http.Client{Transport: tr},
 	}
 
 	if !strings.Contains(address, "://") {
